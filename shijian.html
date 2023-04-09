@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <script type="text/javascript">
+        function getTime(){
+            let nowDate = new Date();
+            let nowHours = a(nowDate.getHours());
+            let nowMinutes = a(nowDate.getMinutes());
+            let nowSeconds = a(nowDate.getSeconds());
+            console.log("获取时间"+ nowHours +"小时"+ nowMinutes + "分钟"+ nowSeconds + "秒");
+            let allDate = nowHours + ":" + nowMinutes +":" + nowSeconds
+            let div = document.querySelector("#aa")
+            for (let i = 0; i< div.length; i ++) {
+                if(i==2 || i == 5) {
+                    continue;
+                }
+                div.innerHTML = allDate
+            }
+        };
+        function a(num){
+            return (num<10 && num>=0) ?"0"+num:num
+        }
+    </script>
+<body>
+    <div id="aa"></div>
+        <input type="button" value="时间" onclick="getTime()">
+</body>
+</html>

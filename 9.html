@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 20px;
+            height: 20px;
+            background-color: #bfa;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .e1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const div = document.querySelector("div")
+            const div1 = document.querySelector(".e1")
+            document.addEventListener("mousemove",(e)=>{
+                div.style.left = e.x + "px"
+                div.style.top = e.y + "px"
+            })
+            div1.addEventListener("mousemove",(e)=>{
+                e.stopPropagation()
+            })
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div class="e1"></div>
+</body>
+</html>

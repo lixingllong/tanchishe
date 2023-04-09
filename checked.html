@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = function () {
+        const btn =document.querySelector("#all")
+        const ho = document.getElementsByName("hobby")
+        const btn2 = document.querySelector("#on")
+        const btn3 = document.querySelector("#reverse")
+        const btn4 = document.querySelector("#send") 
+        const btn5 = document.querySelector("#check-box")
+        btn.addEventListener('click', ()=> {
+            for(let i =0; i < ho.length; i++) {
+                ho[i].checked = true
+            }
+            btn5.checked = true
+        })
+        btn2.addEventListener("click",()=> {
+             for(let i =0; i < ho.length; i++) {
+                ho[i].checked = false
+            }
+              btn5.checked = false
+        })
+        btn3.addEventListener("click",()=>{
+              for(let i =0; i < ho.length; i++) {
+                 ho[i].checked = !ho[i].checked
+            }
+             const hobby = document.querySelectorAll("[name=hobby]:checked")
+                if(ho.length === hobby.length) {
+                    btn5.checked = true
+                } else {
+                      btn5.checked = false
+                }
+        })
+        btn4.addEventListener("click",()=>{
+             for(let i =0; i < ho.length; i++) {
+                ho[i].checked && alert(ho[i].value) 
+            }
+        })
+        btn5.onchange = function () {
+            for(let i = 0; i < ho.length; i++) {
+                ho[i].checked = this.checked
+            }
+            for(let i = 0; i < ho.length; i++) {
+                ho[i].onchange = function () {
+                const hobby = document.querySelectorAll("[name=hobby]:checked")
+                if(ho.length === hobby.length) {
+                    btn5.checked = true
+                } else {
+                      btn5.checked = false
+                }
+                } 
+            }
+        }
+    }
+</script>
+<body>
+    <div>
+        <form action="#">
+            <div>
+                请选择你的爱好:
+                <input type="checkbox" id="check-box"> 全选
+            </div>
+            <div>
+                <input type="checkbox" name="hobby" value="乒乓球">乒乓球
+                <input type="checkbox" name="hobby" value="篮球">篮球
+                <input type="checkbox" name="hobby" value="羽毛球">羽毛球
+                <input type="checkbox" name="hobby" value="足球">足球
+            </div>
+            <div>
+                <button id="all">全选</button>
+                <button id="on">取消</button>
+                <button id="reverse">反选</button>
+                <button id="send">取消</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

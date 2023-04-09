@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .w {
+            width: 400px;
+            margin: 100px auto;
+           text-align: center;
+        }
+        table {
+            width: 400px;
+            border-collapse: collapse;
+            margin-bottom: 20px ;
+        }
+        td,th {
+            border: 1px black solid;
+            padding: 10px 0;
+        }
+        form {
+           width: 300px;
+           margin: 100px auto;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            /*
+            删除的逻辑
+                获取要操作的超链接
+                使用循环给超链接绑定事件
+                获取超链接的父元素 parentNode
+                使用remove() 判断删除
+            添加的逻辑
+                获取添加的button
+                获取input的里面的值。value
+                创建tr td表格里面的东西 
+                给创建好的的值使用textContent 进行赋值
+                赋值完毕将td 添加到tr中 在将tr添加到tbody
+            */ 
+            const links = document.links
+            const tbody = document.querySelector('tbody')
+          
+            for(let i = 0; i <links.length; i++) {
+                  document.addEventListener("click",function(e){
+                    if([...links].includes(e.target)) {
+                        const tr = e.target.parentNode.parentNode
+                        const empName = tr.getElementsByTagName("td")[0].textContent
+                        if(confirm(`确定要删除${empName}吗`)) {
+                            tr.remove()
+                        }
+                    }
+                })
+               
+            }
+            const btn = document.querySelector("button")
+            btn.addEventListener('click',(e)=> {
+                const name = document.querySelector("#name").value
+                const email = document.querySelector("#email").value
+                const salary = document.querySelector("#salary").value
+                const tr = document.createElement("tr")
+                const nameTd = document.createElement("td")
+                const emailTd = document.createElement("td")
+                const salaryTd = document.createElement("td")
+
+                nameTd.textContent= name
+                emailTd.textContent = email
+                salaryTd.textContent = salary
+                tr.appendChild(nameTd)
+                tr.appendChild(emailTd)
+                tr.appendChild(salaryTd)
+                tr.insertAdjacentHTML("beforeend",`  <td><a href="javascript:;">删除</a></td>`)
+                tbody.appendChild(tr)
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="w">
+        <table>
+            <tbody>
+                <tr>
+                    <th>姓名</th>
+                    <th>邮件</th>
+                    <th>薪资</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>孙悟空</td>
+                    <td>swk@qq.com</td>
+                    <td>1000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+                <tr>
+                    <td>猪八戒</td>
+                    <td>zbj@qq.com</td>
+                    <td>2000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+                <tr>
+                    <td>沙和尚</td>
+                    <td>shs@qq.com</td>
+                    <td>3000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form action="#">
+        <div>
+            <label for="name">姓名</label>
+            <input type="text" id="name">
+        </div>
+        <div>
+            <label for="email">邮件</label>
+            <input type="email" id="email">
+        </div>
+        <div>
+            <label for="salary">薪资</label>
+            <input type="number" id="salary">
+        </div>
+        <button>添加</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .outer {
+        width: 225px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      .img-wrapper {
+        width: 100%;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        const img = document.querySelector("img");
+        const btn = document.querySelector("#prev");
+        const btns = document.querySelector("#next");
+        const info = document.querySelector("#info");
+        const z = document.querySelector("#z");
+        // 图片的链接合成数组
+        const imgArr = [
+          "./imges/012.png",
+          "./imges/013.png",
+          "./imges/014.png",
+          "./imges/015.png",
+          "./imges/016.png",
+          "./imges/017.png",
+        ];
+        // 改变图片的变量
+        let current = 0;
+        // 防抖定时器的变量
+        let timer;
+        // 显示第几张图片
+        info.textContent = `总共${imgArr.length}张,当前第 ${current + 1}张`;
+        // 自动切换图片的事件
+        z.addEventListener("click", () => {
+            // 开启定时器
+          timer = setTimeout(function auto() {
+            // 调用下一张图片的事件
+            btns.click();
+            // 开启定时器
+            timer = setTimeout(auto, 2000);
+          }, 2000);
+        });
+        btn.addEventListener("click", () => {
+          clearTimeout(timer);
+          current--;
+          if (current < 0) {
+            current = imgArr.length - 1;
+          }
+          img.src = imgArr[current];
+          info.textContent = `总共${imgArr.length}张,当前第 ${current + 1}张`;
+        });
+        btns.addEventListener("click", () => {
+          clearTimeout(timer);
+          current++;
+          if (current > imgArr.length - 1) {
+            current = 0;
+          }
+          img.src = imgArr[current];
+          info.textContent = `总共${imgArr.length}张,当前第 ${current + 1}张`;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="outer">
+      <p id="info">总共n张,当前第m张</p>
+      <div class="img-wrapper">
+        <img src="./imges/012.png" alt="" />
+      </div>
+      <div class="btn-wrapper">
+        <button id="prev">上一张</button>
+        <button id="z">自动</button>
+        <button id="next">下一张</button>
+      </div>
+    </div>
+  </body>
+</html>
